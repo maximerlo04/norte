@@ -1,0 +1,227 @@
+.admin {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(32px, 6vw, 64px) var(--gutter) 96px;
+}
+
+.admin-title {
+    margin-bottom: 8px;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+}
+
+.admin-sub {
+    margin-bottom: 56px;
+    color: var(--grey);
+}
+
+.admin-section { margin-bottom: 72px; }
+
+.admin-section > h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--black);
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 28px;
+}
+
+.count {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--grey);
+}
+
+/* Inputs */
+.admin input[type="text"], .admin input[type="number"] {
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--white);
+    font: inherit;
+}
+
+.admin input[type="text"]:focus, .admin input[type="number"]:focus {
+    border-color: var(--black);
+}
+
+.admin input[type="file"] { font-size: 14px; }
+
+.admin input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 14px;
+    border: 1px solid var(--black);
+    background: var(--white);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin input[type="file"]::file-selector-button:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* Formulario de producto */
+#product-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px 16px;
+    align-items: end;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.admin .field input[type="text"], .admin .field input[type="number"] { width: 100%; }
+
+.field-wide { grid-column: span 2; }
+
+.btn-primary {
+    height: 44px;
+    padding: 0 24px;
+    background: var(--black);
+    color: var(--white);
+    font-weight: 500;
+    transition: background 0.15s;
+}
+
+.btn-primary:hover { background: #2B2B2B; }
+
+/* Tabla de productos */
+.table-wrap { overflow-x: auto; }
+
+#products-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+}
+
+#products-table th {
+    padding: 0 8px 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    color: var(--grey);
+}
+
+#products-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.admin td input[type="text"] { 
+    width: 100%; 
+    min-width: 140px; 
+}
+
+.admin td input[type="number"] { width: 96px; }
+
+.thumb {
+    display: block;
+    width: 48px;
+    height: 64px;
+    margin-bottom: 8px;
+    object-fit: cover;
+    background: var(--mist);
+}
+
+.img-cell { width: 220px; }
+
+.row-actions { white-space: nowrap; }
+
+.save-btn {
+    height: 36px;
+    padding: 0 14px;
+    border: 1px solid var(--black);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+.save-btn:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.delete-btn {
+    height: 36px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: var(--oxblood);
+}
+
+.delete-btn:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Pedidos */
+.empty { color: var(--grey); }
+
+.order {
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+}
+
+.order-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.order-head h3 { 
+    font-size: 18px; 
+    font-weight: 500; 
+}
+
+.order-head .date {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--grey);
+}
+
+.status-select {
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--black);
+    border-radius: 0;
+    background: var(--white);
+    font: inherit;
+}
+
+.order-items { list-style: none; }
+
+.order-items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    color: var(--grey);
+}
+
+.order-total {
+    margin-top: 8px;
+    text-align: right;
+    font-weight: 500;
+}
+
+@media (max-width: 560px) {
+    .field-wide { grid-column: auto; }
+}

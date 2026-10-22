@@ -1,0 +1,28 @@
+###PRODUCT 
+
+GET http://127.0.0.1:3000/products
+
+###Registro
+POST http://127.0.0.1:3000/auth/register
+Content-Type: application/json
+
+{"username": "maxi", "password": "1234567"}
+
+###Login
+
+POST http://127.0.0.1:3000/auth/login
+Content-Type: application/json
+
+{"username": "maxi", "password": "1234567"}
+
+###Crear Orden
+
+POST http://127.0.0.1:3000/orders
+Content-Type: application/json
+
+{"items": [{"productId": "c7864e18-c3fb-11f1-9495-d8bbc1007647", "quantity": 2}]}
+
+###Ruta protegida
+
+GET http://127.0.0.1:3000/auth/me
+

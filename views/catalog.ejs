@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/catalog.css">
+    <title>Tienda</title>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="/catalog" aria-current="page">Catálogo</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <% if (user) { %>
+                    <li><a href="/orders">Mis compras</a></li>
+                <% } %>
+                <% if (user && user.role === 'admin') { %>
+                    <li><a href="/admin">Admin</a></li>
+                <% } %>
+            </ul>
+
+            <a class="brand" href="/catalog">Norte</a>
+
+            <div class="nav-actions">
+                <% if (user) { %>
+                    <span class="nav-user"><%= user.username %></span>
+                    <button id="logout-btn" class="text-btn">Cerrar sesión</button>
+                <% } else { %>
+                    <a href="/login" class="text-btn">Ingresar</a>
+                <% } %>
+                <button id="cart-button" class="text-btn">
+                    Carrito <span id="cart-count" class="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h1>Colección</h1>
+            <p>Remeras, buzos, shorts y zapatillas para el día a día.</p>
+        </section>
+
+        <div class="toolbar">
+            <p><%= products.length %> <%= products.length === 1 ? 'producto' : 'productos' %></p>
+        </div>
+
+        <div id="product-grid">
+            <% products.forEach(product => { %>
+                <article class="product-card <%= product.stock === 0 ? 'is-soldout' : '' %>"
+                        data-id="<%= product.id %>" data-price="<%= product.price %>">
+                    <div class="product-media">
+                        <% if (product.image) { %>
+                            <img src="<%= product.image %>" alt="<%= product.name %>" loading="lazy">
+                        <% } %>
+                    </div>
+                    <div class="product-info">
+                        <h3><%= product.name %></h3>
+                        <p class="price">$<%= Number(product.price).toLocaleString('es-AR') %></p>
+                        <% if (product.description) { %>
+                            <p class="description"><%= product.description %></p>
+                        <% } %>
+                    </div>
+                    <button class="add-btn" <%= product.stock === 0 ? 'disabled' : '' %>>
+                        <%= product.stock === 0 ? 'Agotado' : 'Agregar al carrito' %>
+                    </button>
+                </article>
+            <% }) %>
+        </div>
+
+        <section id="contacto" class="contact">
+            <div class="contact-intro">
+                <h2>Contacto</h2>
+                <p>¿Tenés dudas sobre un talle, un pedido o un envío? Escribinos por el medio que prefieras.</p>
+            </div>
+
+            <dl class="contact-list">
+                <div>
+                    <dt>Email</dt>
+                    <dd><a href="mailto:tu@email.com">tu@email.com</a></dd>
+                </div>
+                <div>
+                    <dt>WhatsApp</dt>
+                    <dd><a href="https://wa.me/5491100000000" target="_blank" rel="noopener">+54 9 11 0000-0000</a></dd>
+                </div>
+                <div>
+                    <dt>Instagram</dt>
+                    <dd><a href="https://instagram.com/tumarca" target="_blank" rel="noopener">@tumarca</a></dd>
+                </div>
+                <div>
+                    <dt>Horario de atención</dt>
+                    <dd>Lunes a viernes, de 9 a 18 h</dd>
+                </div>
+            </dl>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="brand" href="/catalog">Norte</a>
+        <p>© 2026 Norte. Todos los derechos reservados.</p>
+    </footer>
+
+    <div id="cart-overlay" class="hidden"></div>
+
+    <aside id="cart-panel" class="hidden" aria-label="Carrito">
+        <div class="cart-head">
+            <h2>Tu carrito</h2>
+            <button id="cart-close" class="cart-close" aria-label="Cerrar carrito">
+                <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+            </button>
+        </div>
+        <ul id="cart-items"></ul>
+        <p class="cart-total">
+            <span>Total</span>
+            <span>$<span id="cart-total">0</span></span>
+        </p>
+        <button id="checkout-btn">Finalizar compra</button>
+    </aside>
+
+    <script src="/scripts/cart.js"></script>
+</body>
+</html>

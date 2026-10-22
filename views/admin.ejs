@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración | Norte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/admin.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="/catalog">Catalogo</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#ordenes">Pedidos</a></li>
+            </ul>
+            <a class="brand" href="/catalog">Norte</a>
+            <div class="nav-actions"></div>
+        </nav>
+    </header>
+
+    <main class="admin">
+        <h1 class="admin-title">Administración</h1>
+        <p class="admin-sub">Cargá productos, actualizá el stock y seguí los pedidos.</p>
+
+        <section class="admin-section">
+            <h2>Nuevo producto</h2>
+            <form id="product-form">
+                <div class="field">
+                    <label for="p-name">Nombre</label>
+                    <input id="p-name" name="name" type="text" required>
+                </div>
+                <div class="field field-wide">
+                    <label for="p-description">Descripción</label>
+                    <input id="p-description" name="description" type="text">
+                </div>
+                <div class="field">
+                    <label for="p-price">Precio</label>
+                    <input id="p-price" name="price" type="number" step="0.01" min="0" required>
+                </div>
+                <div class="field">
+                    <label for="p-stock">Stock</label>
+                    <input id="p-stock" name="stock" type="number" min="0" required>
+                </div>
+                <div class="field field-wide">
+                    <label for="p-image">Foto</label>
+                    <input id="p-image" name="image" type="file" accept="image/jpeg,image/png,image/webp">
+                </div>
+                <button type="submit" class="btn-primary">Agregar producto</button>
+            </form>
+        </section>
+
+        <section id="productos" class="admin-section">
+            <h2>Productos <span class="count">(<%= products.length %>)</span></h2>
+
+            <div class="table-wrap">
+                <table id="products-table">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% products.forEach(product => { %>
+                            <tr data-id="<%= product.id %>">
+                                <td class="img-cell">
+                                    <% if (product.image) { %>
+                                        <img class="thumb" src="<%= product.image %>" alt="">
+                                    <% } else { %>
+                                        <div class="thumb"></div>
+                                    <% } %>
+                                    <input class="f-image" type="hidden" value="<%= product.image ?? '' %>">
+                                    <input class="f-file" type="file" accept="image/jpeg,image/png,image/webp">
+                                </td>
+                                <td><input class="f-name" type="text" value="<%= product.name %>"></td>
+                                <td><input class="f-description" type="text" value="<%= product.description ?? '' %>"></td>
+                                <td><input class="f-price" type="number" step="0.01" min="0" value="<%= product.price %>"></td>
+                                <td><input class="f-stock" type="number" min="0" value="<%= product.stock %>"></td>
+                                <td class="row-actions">
+                                    <button class="save-btn">Guardar</button>
+                                    <button class="delete-btn">Borrar</button>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="ordenes" class="admin-section">
+            <h2>Pedidos <span class="count">(<%= orders.length %>)</span></h2>
+
+            <% const statuses = [
+                { value: 'pending', label: 'Pendiente' },
+                { value: 'paid', label: 'Pagada' },
+                { value: 'shipped', label: 'Enviada' }
+            ] %>
+
+            <% if (orders.length === 0) { %>
+                <p class="empty">Todavía no hay pedidos.</p>
+            <% } %>
+
+            <% orders.forEach(order => { %>
+                <article class="order" data-id="<%= order.id %>">
+                    <div class="order-head">
+                        <h3>
+                            <%= order.username %>
+                            <span class="date"><%= new Date(order.createdAt).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
+                        </h3>
+                        <select class="status-select" aria-label="Estado del pedido">
+                            <% statuses.forEach(status => { %>
+                                <option value="<%= status.value %>" <%= order.status === status.value ? 'selected' : '' %>><%= status.label %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <ul class="order-items">
+                        <% order.items.forEach(item => { %>
+                            <li>
+                                <span><%= item.name %> × <%= item.quantity %></span>
+                                <span>$<%= (item.unitPrice * item.quantity).toLocaleString('es-AR') %></span>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <p class="order-total">Total $<%= Number(order.total).toLocaleString('es-AR') %></p>
+                </article>
+            <% }) %>
+        </section>
+    </main>
+
+    <script src="/scripts/admin.js"></script>
+</body>
+</html>

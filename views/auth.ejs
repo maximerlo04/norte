@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar | Norte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/auth.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="/catalog">Volver a la tienda</a></li>
+            </ul>
+            <a class="brand" href="/catalog">Norte</a>
+            <div class="nav-actions"></div>
+        </nav>
+    </header>
+
+    <main class="auth">
+        <section class="auth-panel">
+            <h1>Ingresar</h1>
+            <p class="lead">Entrá a tu cuenta para finalizar compras y ver tus pedidos.</p>
+
+            <form id="login-form">
+                <div class="field">
+                    <label for="login-username">Usuario</label>
+                    <input id="login-username" type="text" autocomplete="username" required>
+                </div>
+                <div class="field">
+                    <label for="login-password">Contraseña</label>
+                    <input id="login-password" type="password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="submit">Ingresar</button>
+                <p class="message" role="status"></p>
+            </form>
+        </section>
+
+        <section class="auth-panel">
+            <h1>Crear cuenta</h1>
+            <p class="lead">Registrate para comprar más rápido y seguir tus pedidos.</p>
+
+            <form id="register-form">
+                <div class="field">
+                    <label for="register-username">Usuario</label>
+                    <input id="register-username" type="text" autocomplete="username" required>
+                </div>
+                <div class="field">
+                    <label for="register-password">Contraseña</label>
+                    <input id="register-password" type="password" autocomplete="new-password" required>
+                </div>
+                <div class="field">
+                    <label for="register-confirm">Repetir contraseña</label>
+                    <input id="register-confirm" type="password" autocomplete="new-password" required>
+                </div>
+                <button type="submit" class="submit">Crear cuenta</button>
+                <p class="message" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="/scripts/auth.js"></script>
+</body>
+</html>
