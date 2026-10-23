@@ -6,7 +6,6 @@ Tienda online full-stack hecha con Node.js, Express y MySQL. Incluye catálogo, 
 
 > La demo corre en el plan gratuito de Render: si estuvo un rato sin visitas, la primera carga puede tardar hasta un minuto.
 
-![Catálogo](screenshots/catalogo.png)
 
 ## Funcionalidades
 
