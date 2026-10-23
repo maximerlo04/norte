@@ -2,7 +2,7 @@
 
 Tienda online full-stack hecha con Node.js, Express y MySQL. Incluye catálogo, carrito, compra con control de stock, autenticación con roles y un panel de administración para gestionar productos, pedidos e imágenes.
 
-**Demo en vivo:** https://TU-APP.onrender.com
+**Demo en vivo:** https://norte-xoch.onrender.com/catalog
 
 > La demo corre en el plan gratuito de Render: si estuvo un rato sin visitas, la primera carga puede tardar hasta un minuto.
 
